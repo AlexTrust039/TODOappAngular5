@@ -1,20 +1,56 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div id="main">
+
+  <form novalidate (submit) = "add()" [formGroup]="form">
+    <div id="container">
+      <div class="add">
+        <mat-form-field appearance="outline" id="first">
+          <mat-label>Название задачи</mat-label>
+          <input matInput formControlName="label">
+          <mat-error *ngIf="form.controls.label.invalid">Введите назавание задачи</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" id="second">
+          <mat-label>Краткое описание</mat-label>
+          <input matInput formControlName="description">
+          <mat-error *ngIf="form.controls.description.invalid">Введите описание</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="add prior">
+        <mat-button-toggle-group name="fontStyle" formControlName="priority">
+          <mat-button-toggle value="red" style="background-color: red" ></mat-button-toggle>
+          <mat-button-toggle value="#76DC76" style="background-color: #76DC76"></mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+      
+
+      <div class="add">
+        <button mat-raised-button color="primary" [disabled] = "form.invalid">Добавить</button>
+      </div>
+    </div>
+
+  </form>
+
+  
+
+  <div id="wrapper" *ngFor = "let elem of list; let i = index">
+    <div id="catalog">
+        <div id="check">
+          <mat-checkbox color="primary" #chkbox></mat-checkbox>
+          <p style="margin: 0 10px;" [ngStyle]= "{'text-decoration': chkbox.checked ? 'line-through' : 'none', 'color': chkbox.checked ? '#A8B5A8' : elem.color}">{{elem.date}}</p>
+        </div>
+        <div id="center">
+            <p style="font-size: 25px; margin-top: 5px; margin-bottom: 10px;" [ngStyle]= "{'text-decoration': chkbox.checked ? 'line-through' : 'none', 'color': chkbox.checked ? '#A8B5A8' : elem.color}">{{elem.label}}</p>
+            <p style="font-size: 15px; margin-top: 0" [ngStyle]= "{'text-decoration': chkbox.checked ? 'line-through' : 'none', 'color': chkbox.checked ? '#A8B5A8' : elem.color}">{{elem.description}}</p>
+        </div>
+        <button mat-icon-button>
+            <mat-icon (click) = "remove(i)">delete</mat-icon>
+        </button>
+    </div>
+  </div>
+
+
+  
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+
 
